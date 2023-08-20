@@ -1,68 +1,63 @@
-# todo-list-cappellotto
+# Lista de Tarefas em Vue.js
 
-This template should help get you started developing with Vue 3 in Vite.
+Esta é uma aplicação simples de lista de tarefas (To-Do List) construída usando Vue 3, TypeScript, Pinia e TailwindCSS.
 
-## Recommended IDE Setup
+## Funcionalidades
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+### 1. Visualização de Tarefas
 
-## Type Support for `.vue` Imports in TS
+- Apresenta uma lista de tarefas.
+- Cada item da lista oferece uma opção para ver seus detalhes.
+- Um pequeno texto guia o usuário para clicar em 'Details' e ver os detalhes da tarefa.
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+### 2. Criação e Edição de Tarefas
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+- Utiliza um formulário (`TaskForm`) para permitir aos usuários adicionar novas tarefas ou editar tarefas existentes.
+- Os campos disponíveis no formulário são: título e descrição.
+- Tarefas recém-criadas recebem um ID gerado automaticamente.
+- Na edição, os usuários podem salvar alterações, excluir a tarefa ou voltar para a lista principal.
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+### 3. Roteamento
 
-## Customize configuration
+- A aplicação está integrada com o Vue Router.
+- O roteamento facilita a navegação de volta para a lista principal ou para carregar uma tarefa específica para edição com base em um ID fornecido.
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+### 4. Gerenciamento de Estado (State Management)
 
-## Project Setup
+- A aplicação utiliza Pinia como solução de gerenciamento de estado.
+- Oferece métodos para adicionar, editar, deletar e obter tarefas.
 
-```sh
-npm install
-```
+## Estilização
 
-### Compile and Hot-Reload for Development
+- A interface do usuário é estilizada usando TailwindCSS, proporcionando uma experiência de usuário moderna e responsiva.
 
-```sh
-npm run dev
-```
+## Testes
 
-### Type-Check, Compile and Minify for Production
+- A aplicação está equipada com testes unitários para garantir seu correto funcionamento.
+- Os testes verificam a renderização correta dos componentes e a lógica de adição/edição de tarefas.
 
-```sh
-npm run build
-```
+## Iniciando com o projeto
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+1. **Instalação**
 
-```sh
-npm run test:unit
-```
+   Para configurar e executar o projeto localmente, primeiro clone o repositório e, em seguida, instale as dependências:
 
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
+   ```bash
+   yarn install
+   ```
 
-```sh
-npm run test:e2e:dev
-```
+2. **Execução Local**
 
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
+   Para iniciar o servidor de desenvolvimento e ver a aplicação em ação:
 
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
+   ```bash
+   yarn dev
+   ```
 
-```sh
-npm run build
-npm run test:e2e
-```
+3. **Testes Unitários**
 
-### Lint with [ESLint](https://eslint.org/)
+   Execute os testes unitários para garantir que tudo esteja funcionando como esperado:
 
-```sh
-npm run lint
-```
+   ```bash
+   yarn test:unit
+   ```
