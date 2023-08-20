@@ -1,85 +1,55 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+<script lang="ts">
+import { RouterView } from 'vue-router'
+import { onMounted, onBeforeUnmount } from 'vue';
+import { useTodoStore } from '@/stores/todo';
+
+export default {
+
+  setup() {
+    const store = useTodoStore();
+
+    const saveItems = () => {
+      store.saveTasks()
+    }
+
+    onMounted(() => {
+      window.addEventListener('beforeunload', saveItems)
+      store.getTasks();
+    });
+
+
+
+    onBeforeUnmount(() => {
+      window.removeEventListener('beforeunload', saveItems)
+      saveItems()
+    });
+
+    return {};
+  }
+}
+
+
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <body class="min-h-screen">
+    <header class="flex justify-center items-center p-4 md:p-8">
+      <img @click="$router.push('/tasks')" class="w-32 h-16 md:w-48 md:h-24 hover:cursor-pointer"
+        src="https://static.wixstatic.com/media/a4e47e_d69261d12cd24a3e9c80153d5106f83c~mv2.png/v1/crop/x_88,y_18,w_1313,h_662/fill/w_224,h_113,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Logo_Flip_Horizontal_Color.png"
+        alt="Logo" srcset="">
+      <h1 class="text-xl md:text-2xl font-bold">those <small class="text-xs"> tasks</small></h1>
+    </header>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+    <main class="container mx-auto px-4 md:px-8 max-w-[648px]">
+      <RouterView />
+    </main>
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+    <footer class="w-full h-16 bg-primary-flip border-t-2 border-white
+            fixed left-0 bottom-0
+            flex justify-center items-center
+            text-white  
+            ">
+      Created by Eduardo Cappellotto 🚀
+    </footer>
+  </body>
 </template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
-</style>
